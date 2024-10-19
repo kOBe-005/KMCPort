@@ -87,6 +87,11 @@
   }
 }
 
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
 @layer utilities {
   .gradient-title {
     @apply font-extrabold bg-gradient-to-br from-blue-600 to-blue-400 bg-clip-text tracking-tighter text-transparent pb-4 pr-2;
