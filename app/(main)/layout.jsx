@@ -8,8 +8,10 @@ import { useUser } from "@clerk/nextjs";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: BarChart },
-  { href: "/events", label: "Events", icon: Calendar },
-  { href: "/meetings", label: "Meetings", icon: Users },
+  { href: "/job", label: "Job Portal", icon: Clock },
+  { href: "/applicants", label: "Applicants", icon: Users },
+  { href: "/events", label: "Interview Sessions", icon: Calendar },
+  { href: "/meetings", label: "Schedule", icon: Users },
   { href: "/availability", label: "Availability", icon: Clock },
 ];
 
@@ -20,17 +22,17 @@ export default function AppLayout({ children }) {
   return (
     <>
       {!isLoaded && <BarLoader width={"100%"} color="#36d7b7" />}
-      <div className="flex flex-col h-screen bg-blue-50 md:flex-row">
+      <div className="flex flex-col h-screen bg-secondary md:flex-row">
         {/* Sidebar for medium screens and up */}
-        <aside className="hidden md:block w-64 bg-white">
+        <aside className="hidden md:block w-64 -mt-50 bg-background">
           <nav className="mt-8">
             <ul>
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`flex items-center px-4 py-4 text-gray-700  hover:bg-gray-100 ${
-                      pathname === item.href ? "bg-blue-100" : ""
+                    className={`flex items-center px-4 py-4 text-slate-300  hover:bg-gray-100/10 ${
+                      pathname === item.href ? "bg-muted-foreground/70" : ""
                     }`}
                   >
                     <item.icon className="w-5 h-5 mr-3" />
@@ -61,7 +63,7 @@ export default function AppLayout({ children }) {
                 <Link
                   href={item.href}
                   className={`flex flex-col items-center py-2 px-4 ${
-                    pathname === item.href ? "text-blue-600" : "text-gray-600"
+                    pathname === item.href ? "text-blue-600" : "text-gray-500"
                   }`}
                 >
                   <item.icon className="w-6 h-6" />

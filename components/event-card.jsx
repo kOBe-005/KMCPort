@@ -34,7 +34,7 @@ export default function EventCard({ event, username, isPublic = false }) {
   const { loading, fn: fnDeleteEvent } = useFetch(deleteEvent);
 
   const handleDelete = async () => {
-    if (window?.confirm("Are you sure you want to delete this event?")) {
+    if (window?.confirm("Are you sure you want to delete this session?")) {
       await fnDeleteEvent(event.id);
       router.refresh();
     }

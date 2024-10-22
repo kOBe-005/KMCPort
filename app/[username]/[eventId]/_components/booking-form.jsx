@@ -75,7 +75,7 @@ export default function BookingForm({ event, availability }) {
 
   if (data) {
     return (
-      <div className="text-center p-10 border bg-white">
+      <div className="text-center p-10 border bg-secondary">
         <h2 className="text-2xl font-bold mb-4">Booking successful!</h2>
         {data.meetLink && (
           <p>
@@ -95,7 +95,7 @@ export default function BookingForm({ event, availability }) {
   }
 
   return (
-    <div className="flex flex-col gap-8 p-10 border bg-white">
+    <div className="flex flex-col gap-8 p-10 border bg-secondary">
       <div className="md:h-96 flex flex-col md:flex-row gap-5 ">
         <div className="w-full">
           <DayPicker
@@ -109,7 +109,7 @@ export default function BookingForm({ event, availability }) {
             modifiers={{ available: availableDays }}
             modifiersStyles={{
               available: {
-                background: "lightblue",
+                background: "#030712",
                 borderRadius: 100,
               },
             }}
@@ -158,11 +158,11 @@ export default function BookingForm({ event, availability }) {
           <div>
             <Textarea
               {...register("additionalInfo")}
-              placeholder="Additional Information"
+              placeholder="Applicant No."
             />
           </div>
           <Button type="submit" disabled={loading} className="w-full">
-            {loading ? "Scheduling..." : "Schedule Event"}
+            {loading ? "Scheduling..." : "Schedule Interview"}
           </Button>
         </form>
       )}

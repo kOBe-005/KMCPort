@@ -45,7 +45,7 @@ export default function CreateEventDrawer() {
     <Drawer open={isOpen} onClose={handleClose}>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Create New Event</DrawerTitle>
+          <DrawerTitle>Post New Job Position</DrawerTitle>
         </DrawerHeader>
         <EventForm
           onSubmitForm={() => {

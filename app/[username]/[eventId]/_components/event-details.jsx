@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export default function EventDetails({ event }) {
   const { user } = event;
   return (
-    <div className="p-10 lg:w-1/3 bg-white">
+    <div className="p-10 lg:w-1/3 bg-secondary">
       <h1 className="text-3xl font-bold mb-4">{event.title}</h1>
       <div className="flex items-center mb-4">
         <Avatar className="w-12 h-12 mr-4">
@@ -13,7 +13,7 @@ export default function EventDetails({ event }) {
         </Avatar>
         <div>
           <h2 className="text-xl font-semibold">{user.name}</h2>
-          <p className="text-gray-600">{user.email}</p>
+          <p className="text-gray-200">{user.email}</p>
         </div>
       </div>
       <div className="flex items-center mb-2">
@@ -24,7 +24,7 @@ export default function EventDetails({ event }) {
         <Calendar className="mr-2" />
         <span>Google Meet</span>
       </div>
-      <p className="text-gray-700">{event.description}</p>
+      <p className="text-gray-300">{event.description}</p>
     </div>
   );
 }

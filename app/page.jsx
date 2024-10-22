@@ -9,34 +9,37 @@ import Link from "next/link";
 const features = [
   {
     icon: Calendar,
-    title: "Create Events",
-    description: "Easily set up and customize your event types",
+    title: "Post Jobs",
+    description: "Easily post and customize your open job vacancies",
   },
   {
     icon: Clock,
-    title: "Manage Availability",
-    description: "Define your availability to streamline scheduling",
+    title: "Hassle-free Interview",
+    description: "Define your availability to streamline interview",
   },
   {
     icon: LinkIcon,
-    title: "Custom Links",
-    description: "Share your personalized scheduling link",
+    title: "Customize",
+    description: "Share your personalized job page and interview page links",
   },
 ];
 
 const howItWorks = [
-  { step: "Sign Up", description: "Create your free Schedulrr account" },
+  {
+    step: "Sign up",
+    description: "Create your own dashboard for job applications",
+  },
+  {
+    step: "Post Open Positions",
+    description: "Post all the available positions in your company",
+  },
   {
     step: "Set Availability",
-    description: "Define when you're available for meetings",
+    description: "Define when you're available for interview",
   },
   {
     step: "Share Your Link",
-    description: "Send your scheduling link to clients or colleagues",
-  },
-  {
-    step: "Get Booked",
-    description: "Receive confirmations for new appointments automatically",
+    description: "Send your scheduling links to accepted applicants",
   },
 ];
 
@@ -47,11 +50,11 @@ const Home = () => {
       <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-24">
         <div className="lg:w-1/2">
           <h1 className="text-7xl font-extrabold gradient-title pb-6">
-            Simplify Your Scheduling
+            Streamline Job Application
           </h1>
-          <p className="text-xl text-gray-600 mb-10">
-            Schedulrr helps you manage your time effectively. Create events, set
-            your availability, and let others book time with you seamlessly.
+          <p className="text-xl text-gray-400 mb-10">
+            KMCPort is a new modern job portal that will simplify application
+            process for HR recruiters.
           </p>
           <Link href={"/dashboard"}>
             <Button size="lg" className="text-lg">
@@ -62,8 +65,8 @@ const Home = () => {
         <div className="lg:w-1/2 flex justify-center">
           <div className="relative w-full max-w-md aspect-square">
             <Image
-              src="/poster.png"
-              alt="Scheduling illustration"
+              src="/"
+              alt="Job Application Illustration"
               layout="fill"
               objectFit="contain"
             />
@@ -78,7 +81,7 @@ const Home = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card key={index}>
+            <Card key={index} className="bg-secondary">
               <CardHeader>
                 <feature.icon className="w-12 h-12 text-blue-500 mb-4 mx-auto" />
                 <CardTitle className="text-center text-blue-600">
@@ -86,7 +89,7 @@ const Home = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-center text-gray-600">
+                <p className="text-center text-gray-400">
                   {feature.description}
                 </p>
               </CardContent>
@@ -117,14 +120,14 @@ const Home = () => {
                 </span>
               </div>
               <h3 className="font-semibold text-lg mb-2">{step.step}</h3>
-              <p className="text-gray-600">{step.description}</p>
+              <p className="text-gray-400">{step.description}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className="bg-blue-600 text-white rounded-lg p-8 text-center">
+      <div className="bg-foreground text-background rounded-lg p-8 text-center">
         <h2 className="text-3xl font-bold mb-4">
           Ready to Simplify Your Scheduling?
         </h2>
@@ -133,7 +136,7 @@ const Home = () => {
           management.
         </p>
         <Link href={"/dashboard"}>
-          <Button size="lg" variant="secondary" className="text-blue-600">
+          <Button size="lg" variant="secondary" className="text-foreground">
             Start For Free <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </Link>

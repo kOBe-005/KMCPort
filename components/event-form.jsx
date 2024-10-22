@@ -51,7 +51,7 @@ const EventForm = ({ onSubmitForm, initialData = {} }) => {
           htmlFor="title"
           className="block text-sm font-medium text-gray-700"
         >
-          Event Title
+          Job Title
         </label>
 
         <Input id="title" {...register("title")} className="mt-1" />

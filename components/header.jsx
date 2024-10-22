@@ -14,10 +14,10 @@ async function Header() {
     <nav className="mx-auto py-2 px-4 flex justify-between items-center shadow-md border-b-2">
       <Link href="/" className="flex items-center">
         <Image
-          src="/logo.png"
+          src="/"
           width="150"
           height="60"
-          alt="Schedulrr Logo"
+          alt="KMCPort Logo"
           className="h-16 w-auto"
         />
       </Link>
@@ -26,7 +26,7 @@ async function Header() {
         <Link href="/events?create=true">
           <Button variant="default" className="flex items-center gap-2">
             <PenBox size={18} />
-            <span className="hidden sm:inline">Create Event</span>
+            <span className="hidden sm:inline">Post Job</span>
           </Button>
         </Link>
         <SignedOut>

@@ -57,6 +57,8 @@ model Booking {
   updatedAt      DateTime @updatedAt
 }
 
+
+
 model Availability {
   id          String   @id @default(uuid())
   userId      String   @unique
