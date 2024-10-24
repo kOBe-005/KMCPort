@@ -62,3 +62,25 @@ export const bookingSchema = z.object({
   time: z.string().regex(/^\d{2}:\d{2}$/, "Invalid time format"),
   additionalInfo: z.string().optional(),
 });
+
+export const jobSchema = z.object({
+  title: z
+    .string()
+    .min(1, "Title is required")
+    .max(100, "Title must be 100 characters or less"),
+  description: z
+    .string()
+    .min(1, "Description is required")
+    .max(500, "Description must be 500 characters or less"),
+  responsibilities: z
+    .string()
+    .min(1, "Responsibilities is required")
+    .max(500, "Responsibilities must be 500 characters or less"),
+  benefits: z
+    .string()
+    .min(1, "Benefits is required")
+    .max(500, "Benefits must be 500 characters or less"),
+  Salary: z.number().int().positive("Salary must be a positive number"),
+
+  isOpen: z.boolean(),
+});

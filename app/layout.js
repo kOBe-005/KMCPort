@@ -2,7 +2,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Header from "@/components/header";
+
 import CreateEventDrawer from "@/components/create-event";
+import PostJobDrawer from "@/components/post-job";
+
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -31,6 +34,7 @@ export default function RootLayout({ children }) {
               </div>
             </footer>
             <CreateEventDrawer />
+            <PostJobDrawer />
           </ThemeProvider>
         </body>
       </html>

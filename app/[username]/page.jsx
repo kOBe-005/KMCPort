@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getUserByUsername } from "@/actions/users";
-import EventCard from "@/components/event-card";
+import JobCard from "@/components/job-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export async function generateMetadata({ params }) {
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${user.name}'s Profile | Your App Name`,
-    description: `Book an event with ${user.name}. View available public events and schedules.`,
+    description: `Apply a job and get assisted by ${user.name}. View open positions.`,
   };
 }
 
@@ -34,22 +34,17 @@ export default async function UserProfilePage({ params }) {
         </Avatar>
         <h1 className="text-3xl font-bold mb-2">{user.name}</h1>
         <p className="text-gray-600 text-center">
-          Welcome to my scheduling page. Please select an event below to book a
-          call with me.
+          Welcome, this HR Kobe. Check all the open positions and I'll help you
+          landing your dream job.
         </p>
       </div>
 
-      {user.events.length === 0 ? (
-        <p className="text-center text-gray-600">No public events available.</p>
+      {user.jobs.length === 0 ? (
+        <p className="text-center text-gray-600">No open jobs available.</p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {user.events.map((event) => (
-            <EventCard
-              key={event.id}
-              event={event}
-              username={params.username}
-              isPublic
-            />
+          {user.jobs.map((job) => (
+            <JobCard key={job.id} job={job} username={params.username} isOpen />
           ))}
         </div>
       )}

@@ -1,4 +1,4 @@
-// This is your Prisma schema file,
+// This is Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
@@ -22,6 +22,8 @@ model User {
   imageUrl     String?
   events       Event[]  @relation("UserEvents")
   bookings     Booking[] @relation("UserBookings")
+  jobs         Job[]    @relation("UserPostedJobs")
+  applicants   Applicant[] @relation("UserApplicants")
   availability Availability?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -46,8 +48,8 @@ model Booking {
   event          Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
   userId         String
   user           User    @relation("UserBookings", fields: [userId], references: [id])
-  name           String   // Name of the person booking the event
-  email          String   // Email of the person booking the event
+  name           String   // Name of the person booking the interview
+  email          String   // Email of the person booking the interview
   additionalInfo String?  // Optional additional information from the person booking
   startTime      DateTime
   endTime        DateTime
@@ -57,6 +59,36 @@ model Booking {
   updatedAt      DateTime @updatedAt
 }
 
+model Job {
+  id                String   @id @default(uuid())
+  title             String
+  description       String?
+  responsibilities  String?
+  benefits          String?
+  Salary            Int
+  userId            String
+  user              User     @relation("UserPostedJobs", fields: [userId], references: [id])
+  applicants        Applicant[]
+  isOpen            Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Applicant {
+  id             String  @id @default(uuid())
+  jobId          String
+  job            Job     @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User    @relation("UserApplicants", fields: [userId], references: [id])
+  name           String   // Name of the applicant
+  email          String   // Email of the applicant
+  phoneNumber    Int      // Phone number of the applicant
+  Address        String   // Address of the applicant applying for the job
+  resume         String   // Resume link of the applicant
+  portfolio      String   // Portfolio link of the applicant
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
 
 
 model Availability {

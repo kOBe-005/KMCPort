@@ -11,16 +11,16 @@ import {
   DrawerFooter,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-import EventForm from "./event-form";
+import ApplicantForm from "./applicant-form";
 
-export default function CreateEventDrawer() {
+export default function PostJobDrawer() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const create = searchParams.get("create");
-    if (create === "true") {
+    const jobs = searchParams.get("jobs");
+    if (jobs === "true") {
       setIsOpen(true);
     }
   }, [searchParams]);
@@ -36,7 +36,7 @@ export default function CreateEventDrawer() {
 
   const handleClose = () => {
     setIsOpen(false);
-    if (searchParams.get("create") === "true") {
+    if (searchParams.get("jobs") === "true") {
       router.replace(window?.location.pathname);
     }
   };
@@ -45,9 +45,9 @@ export default function CreateEventDrawer() {
     <Drawer open={isOpen} onClose={handleClose}>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Set up Interview</DrawerTitle>
+          <DrawerTitle>Post New Job Position</DrawerTitle>
         </DrawerHeader>
-        <EventForm
+        <ApplicantForm
           onSubmitForm={() => {
             handleClose();
           }}

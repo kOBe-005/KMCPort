@@ -40,9 +40,9 @@ export async function getUserByUsername(username) {
       name: true,
       email: true,
       imageUrl: true,
-      events: {
+      jobs: {
         where: {
-          isPrivate: false,
+          isOpen: true,
         },
         orderBy: {
           createdAt: "desc",
@@ -51,10 +51,10 @@ export async function getUserByUsername(username) {
           id: true,
           title: true,
           description: true,
-          duration: true,
-          isPrivate: true,
+          Salary: true,
+          isOpen: true,
           _count: {
-            select: { bookings: true },
+            select: { applicants: true },
           },
         },
       },

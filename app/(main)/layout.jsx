@@ -8,7 +8,7 @@ import { useUser } from "@clerk/nextjs";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: BarChart },
-  { href: "/job", label: "Job Portal", icon: Clock },
+  { href: "/jobs", label: "Job Portal", icon: Clock },
   { href: "/applicants", label: "Applicants", icon: Users },
   { href: "/events", label: "Interview Sessions", icon: Calendar },
   { href: "/meetings", label: "Schedule", icon: Users },

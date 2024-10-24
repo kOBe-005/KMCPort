@@ -11,12 +11,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { eventSchema } from "@/app/lib/validators";
-import { createEvent } from "@/actions/events";
+import { jobSchema } from "@/app/lib/validators";
+import { postJob } from "@/actions/jobs";
 import { useRouter } from "next/navigation";
 import useFetch from "@/hooks/use-fetch";
 
-const EventForm = ({ onSubmitForm, initialData = {} }) => {
+const ApplicantForm = ({ onSubmitForm, initialData = {} }) => {
   const router = useRouter();
   const {
     register,
@@ -24,20 +24,26 @@ const EventForm = ({ onSubmitForm, initialData = {} }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(eventSchema),
+    resolver: zodResolver(jobSchema),
     defaultValues: {
       title: initialData.title || "",
       description: initialData.description || "",
-      duration: initialData.duration || 30,
-      isPrivate: initialData.isPrivate ?? true,
+      responsibilities: initialData.responsibilities || "",
+      benefits: initialData.benefits || "",
+      Salary: initialData.Salary || 145000,
+      isOpen: initialData.isOpen ?? true,
     },
   });
 
-  const { loading, error, fn: fnCreateEvent } = useFetch(createEvent);
+  const { loading, error, fn: fnPostJob } = useFetch(postJob);
 
   const onSubmit = async (data) => {
-    await fnCreateEvent(data);
-    if (!loading && !error) onSubmitForm();
+    await fnPostJob(data);
+    if (error || loading) {
+      console.log("Error submitting job:", error);
+      return;
+    }
+    onSubmitForm();
     router.refresh(); // Refresh the page to show updated data
   };
 
@@ -51,7 +57,7 @@ const EventForm = ({ onSubmitForm, initialData = {} }) => {
           htmlFor="title"
           className="block text-sm font-medium text-gray-700"
         >
-          Title
+          Job Title
         </label>
 
         <Input id="title" {...register("title")} className="mt-1" />
@@ -66,7 +72,7 @@ const EventForm = ({ onSubmitForm, initialData = {} }) => {
           htmlFor="description"
           className="block text-sm font-medium text-gray-700"
         >
-          Description
+          Job Description
         </label>
 
         <Textarea
@@ -83,35 +89,69 @@ const EventForm = ({ onSubmitForm, initialData = {} }) => {
 
       <div>
         <label
-          htmlFor="duration"
+          htmlFor="responsibilities"
           className="block text-sm font-medium text-gray-700"
         >
-          Duration (minutes)
+          Job Responsibilities
+        </label>
+
+        <Textarea
+          {...register("responsibilities")}
+          id="responsibilities"
+          className="mt-1"
+        />
+        {errors.responsibilities && (
+          <p className="text-red-500 text-xs mt-1">
+            {errors.responsibilities.message}
+          </p>
+        )}
+      </div>
+
+      <div>
+        <label
+          htmlFor="benefits"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Job Benefits
+        </label>
+
+        <Textarea {...register("benefits")} id="benefits" className="mt-1" />
+        {errors.benefits && (
+          <p className="text-red-500 text-xs mt-1">{errors.benefits.message}</p>
+        )}
+      </div>
+
+      <div>
+        <label
+          htmlFor="Salary"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Salary
         </label>
 
         <Input
-          id="duration"
-          {...register("duration", {
+          id="Salary"
+          {...register("Salary", {
             valueAsNumber: true,
           })}
           type="number"
           className="mt-1"
         />
 
-        {errors.duration && (
-          <p className="text-red-500 text-xs mt-1">{errors.duration.message}</p>
+        {errors.Salary && (
+          <p className="text-red-500 text-xs mt-1">{errors.Salary.message}</p>
         )}
       </div>
 
       <div>
         <label
-          htmlFor="isPrivate"
+          htmlFor="isOpen"
           className="block text-sm font-medium text-gray-700"
         >
-          Event Privacy
+          Job Availability
         </label>
         <Controller
-          name="isPrivate"
+          name="isOpen"
           control={control}
           render={({ field }) => (
             <Select
@@ -119,11 +159,11 @@ const EventForm = ({ onSubmitForm, initialData = {} }) => {
               value={field.value ? "true" : "false"}
             >
               <SelectTrigger className="mt-1">
-                <SelectValue placeholder="Select privacy" />
+                <SelectValue placeholder="Select Availability" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="true">Private</SelectItem>
-                <SelectItem value="false">Public</SelectItem>
+                <SelectItem value="true">Open</SelectItem>
+                <SelectItem value="false">Close</SelectItem>
               </SelectContent>
             </Select>
           )}
@@ -133,10 +173,10 @@ const EventForm = ({ onSubmitForm, initialData = {} }) => {
       {error && <p className="text-red-500 text-xs mt-1">{error.message}</p>}
 
       <Button type="submit" disabled={loading}>
-        {loading ? "Submitting..." : "Create Event"}
+        {loading ? "Submitting..." : "Post Job"}
       </Button>
     </form>
   );
 };
 
-export default EventForm;
+export default ApplicantForm;
